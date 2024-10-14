@@ -18,6 +18,7 @@ export const goodsFromServer = [
 export const App = () => {
   const [data, setData] = useState(goodsFromServer);
   const [reversedStatus, setReversedStatus] = useState(false);
+  const [sortingParam, setSortingParam] = useState('');
 
   const customSort = (sortParam = 'alphabet') => {
     return () => {
@@ -31,6 +32,9 @@ export const App = () => {
             sortedData.reverse();
           }
 
+          setSortingParam(sortParam);
+          setData(sortedData);
+
           break;
 
         case 'length':
@@ -39,6 +43,9 @@ export const App = () => {
           if (reversedStatus === true) {
             sortedData.reverse();
           }
+
+          setSortingParam(sortParam);
+          setData(sortedData);
 
           break;
 
@@ -51,16 +58,19 @@ export const App = () => {
             setReversedStatus(false);
           }
 
+          setData(sortedData);
+
           break;
 
         default:
           sortedData = goodsFromServer;
           setReversedStatus(false);
 
+          setSortingParam(sortParam);
+          setData(sortedData);
+
           break;
       }
-
-      setData(sortedData);
     };
   };
 
@@ -69,7 +79,7 @@ export const App = () => {
       <div className="buttons">
         <button
           type="button"
-          className="button is-info is-light"
+          className={`button is-info ${sortingParam === 'alphabet' ? '' : 'is-light'}`}
           onClick={customSort('alphabet')}
         >
           Sort alphabetically
@@ -77,7 +87,7 @@ export const App = () => {
 
         <button
           type="button"
-          className="button is-success is-light"
+          className={`button is-success ${sortingParam === 'length' ? '' : 'is-light'}`}
           onClick={customSort('length')}
         >
           Sort by length
@@ -85,17 +95,17 @@ export const App = () => {
 
         <button
           type="button"
-          className={`button is-warning ${reversedStatus === false ? 'is-light' : ''}`}
+          className={`button is-warning ${reversedStatus === true ? '' : 'is-light'}`}
           onClick={customSort('reverse')}
         >
           Reverse
         </button>
 
-        {reversedStatus === true && (
+        {(reversedStatus === true || sortingParam !== '') && (
           <button
             type="button"
             className="button is-danger is-light"
-            onClick={customSort('reset')}
+            onClick={customSort('')}
           >
             Reset
           </button>
