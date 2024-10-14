@@ -27,10 +27,18 @@ export const App = () => {
         case 'alphabet':
           sortedData.sort((a, b) => a.localeCompare(b));
 
+          if (reversedStatus === true) {
+            sortedData.reverse();
+          }
+
           break;
 
         case 'length':
           sortedData.sort((a, b) => a.length - b.length);
+
+          if (reversedStatus === true) {
+            sortedData.reverse();
+          }
 
           break;
 
