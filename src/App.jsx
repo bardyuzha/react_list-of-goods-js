@@ -28,7 +28,7 @@ export const App = () => {
         case 'alphabet':
           sortedData.sort((a, b) => a.localeCompare(b));
 
-          if (reversedStatus === true) {
+          if (reversedStatus) {
             sortedData.reverse();
           }
 
@@ -40,7 +40,7 @@ export const App = () => {
         case 'length':
           sortedData.sort((a, b) => a.length - b.length);
 
-          if (reversedStatus === true) {
+          if (reversedStatus) {
             sortedData.reverse();
           }
 
@@ -95,13 +95,13 @@ export const App = () => {
 
         <button
           type="button"
-          className={`button is-warning ${reversedStatus === true ? '' : 'is-light'}`}
+          className={`button is-warning ${reversedStatus ? '' : 'is-light'}`}
           onClick={customSort('reverse')}
         >
           Reverse
         </button>
 
-        {(reversedStatus === true || sortingParam !== '') && (
+        {(reversedStatus || sortingParam !== '') && (
           <button
             type="button"
             className="button is-danger is-light"
