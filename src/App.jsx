@@ -37,9 +37,11 @@ export const App = () => {
         case 'reverse':
           sortedData.reverse();
 
-          reversedStatus === false
-            ? setReversedStatus(true)
-            : setReversedStatus(false);
+          if (reversedStatus === false) {
+            setReversedStatus(true);
+          } else {
+            setReversedStatus(false);
+          }
 
           break;
 
