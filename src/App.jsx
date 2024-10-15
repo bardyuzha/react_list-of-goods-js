@@ -49,29 +49,20 @@ export const App = () => {
 
           break;
 
-        case 'reverse':
-          sortedData.reverse();
-
-          if (reversedStatus === false) {
-            setReversedStatus(true);
-          } else {
-            setReversedStatus(false);
-          }
-
-          setData(sortedData);
-
-          break;
-
         default:
           sortedData = goodsFromServer;
           setReversedStatus(false);
-
           setSortingParam(sortParam);
           setData(sortedData);
 
           break;
       }
     };
+  };
+
+  const toggleReversedStatus = () => {
+    setReversedStatus(!reversedStatus);
+    setData([...data].reverse());
   };
 
   return (
@@ -96,7 +87,7 @@ export const App = () => {
         <button
           type="button"
           className={`button is-warning ${reversedStatus ? '' : 'is-light'}`}
-          onClick={customSort('reverse')}
+          onClick={toggleReversedStatus}
         >
           Reverse
         </button>
